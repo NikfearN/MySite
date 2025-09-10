@@ -1,0 +1,40 @@
+.tech-categories {
+    display: grid;
+    gap: 30px;
+}
+
+.tech-category {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 8px;
+}
+
+.tech-category h3 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 1.3em;
+    font-weight: 600;
+}
+
+.tech-category ul {
+    list-style: none;
+}
+
+.tech-category li {
+    padding: 10px 0;
+    border-bottom: 1px solid #e9ecef;
+    color: #555;
+    font-size: 1.1em;
+}
+
+.tech-category li:last-child {
+    border-bottom: none;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    background: #2c3e50;
+    color: white;
+    margin-top: auto;
+}

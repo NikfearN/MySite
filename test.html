@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест по Основам электротехники и электроники</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/test.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="about.html">Обо мне</a></li>
+                    <li><a href="interests.html">Мои интересы</a></li>
+                    <li><a href="study.html">Учеба</a></li>
+                    <li><a href="album.html">Фотоальбом</a></li>
+                    <li><a href="contact.html">Контакт</a></li>
+                    <li><a href="test.html">Тест</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="main-content">
+                <section class="test-section">
+                    <h1>Тест по Основам электротехники и электроники</h1>
+                    
+                    <form id="testForm" class="test-form">
+                        
+                        <div class="user-info">
+                            <h2>Данные студента</h2>
+                            
+                            <div class="form-group">
+                                <label for="fullname">Фамилия Имя Отчество:</label>
+                                <input type="text" id="fullname" name="fullname" required 
+                                       placeholder="Введите ваше ФИО">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="group">Группа:</label>
+                                <select id="group" name="group" required>
+                                    <option value="">-- Выберите группу --</option>
+                                    <optgroup label="1 курс">
+                                        <option value="ИТ-25-1">ИС-1-21</option>
+                                        <option value="ИТ-25-2">ИС-2-21</option>
+                                        <option value="ИТ-25-3">ПИ-1-21</option>
+                                    </optgroup>
+                                    <optgroup label="2 курс">
+                                        <option value="ИТ-24-1">ИС-1-20</option>
+                                        <option value="ИТ-24-2">ИС-2-20</option>
+                                        <option value="ИТ-24-3">ПИ-1-20</option>
+                                    </optgroup>
+                                    <optgroup label="3 курс">
+                                        <option value="ПИ-23-1">ИС-1-19</option>
+                                        <option value="ПИ-23-2">ИС-2-19</option>
+                                        <option value="ИС-23-1">ПИ-1-19</option>
+                                    </optgroup>
+                                    <optgroup label="4 курс">
+                                        <option value="ПИ-22-1">ИС-1-18</option>
+                                        <option value="ПИ-22-2">ИС-2-18</option>
+                                        <option value="ИС-23-1">ПИ-1-18</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <h3>Вопрос 1: Что измеряется в Омах?</h3>
+                            <div class="options radio-options">
+                                <label>
+                                    <input type="radio" name="question1" value="a" required>
+                                    <span>а) Электрическое сопротивление</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="question1" value="b">
+                                    <span>b) Электрическое напряжение</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="question1" value="c">
+                                    <span>c) Электрическая мощность</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <h3>Вопрос 2: Какой элемент используется для усиления сигнала?</h3>
+                            <div class="form-group">
+                                <select name="question2" required>
+                                    <option value="">-- Выберите ответ --</option>
+                                    <option value="resistor">Резистор</option>
+                                    <option value="capacitor">Конденсатор</option>
+                                    <option value="transistor">Транзистор</option>
+                                    <option value="diode">Диод</option>
+                                    <option value="inductor">Катушка индуктивности</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <h3>Вопрос 3: Опишите принцип работы диода</h3>
+                            <div class="form-group">
+                                <textarea name="question3" rows="5" placeholder="Введите ваш ответ..." required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="submit" class="submit-btn">Отправить тест</button>
+                            <button type="reset" class="reset-btn">Очистить форму</button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </main>
+
+        <footer>
+
+        </footer>
+    </div>
+</body>
+</html>

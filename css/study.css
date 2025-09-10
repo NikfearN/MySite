@@ -1,0 +1,56 @@
+.university-info {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.university-info h1 {
+    font-size: 2.2em;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.university-info h2 {
+    font-size: 1.8em;
+    color: #34495e;
+    margin-bottom: 30px;
+}
+
+.disciplines-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+.disciplines-table th, 
+.disciplines-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.disciplines-table th {
+    background-color: #2c3e50;
+    color: white;
+}
+
+.hours-type {
+    background-color: #34495e;
+    font-size: 0.85em;
+    padding: 5px;
+}
+
+.table-caption {
+    caption-side: top;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    padding: 10px;
+}
+
+.semester-header {
+    background-color: #34495e;
+    color: white;
+}

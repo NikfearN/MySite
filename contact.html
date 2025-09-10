@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакт</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/contact.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="about.html">Обо мне</a></li>
+                    <li><a href="interests.html">Мои интересы</a></li>
+                    <li><a href="study.html">Учеба</a></li>
+                    <li><a href="album.html">Фотоальбом</a></li>
+                    <li><a href="contact.html">Контакт</a></li>
+                    <li><a href="test.html">Тест</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content-section">
+                <h1>Контактная форма</h1>
+                
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="fullname">Фамилия Имя Отчество:</label>
+                        <input type="text" id="fullname" name="fullname" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Пол:</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="gender" value="male" required> Мужской</label>
+                            <label><input type="radio" name="gender" value="female"> Женский</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age">Возраст:</label>
+                        <select id="age" name="age" required>
+                            <option value="">Выберите возраст</option>
+                            <option value="18-25">18-25 лет</option>
+                            <option value="26-35">26-35 лет</option>
+                            <option value="36-45">36-45 лет</option>
+                            <option value="46+">46+ лет</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">E-mail:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Сообщение:</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+
+                    <div class="form-buttons">
+                        <button type="submit">Отправить</button>
+                        <button type="reset">Очистить форму</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <footer>
+        </footer>
+    </div>
+</body>
+</html>

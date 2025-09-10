@@ -1,0 +1,90 @@
+.interests-nav {
+    background: #f0f0f0;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.interests-header {
+    margin-bottom: 30px;
+    padding-left: 40px;
+}
+
+.interests-header h1 {
+    color: #2c3e50;
+    font-size: 2.5em;
+    font-weight: 300;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+.interests-nav h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.interests-nav ul {
+    list-style: none;
+}
+
+.interests-nav li {
+    margin-bottom: 8px;
+}
+
+.interest-section {
+    background: white;
+    padding: 30px;
+    margin-bottom: 30px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.interest-section h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    font-size: 1.8em;
+}
+
+.interest-section p {
+    margin-bottom: 15px;
+    color: #333;
+    line-height: 1.6;
+    font-size: 1.1em;
+}
+
+.interest-section ul, 
+.interest-section ol {
+    margin-left: 30px;
+    margin-bottom: 20px;
+}
+
+.interest-section li {
+    margin-bottom: 8px;
+    color: #333;
+    line-height: 1.5;
+}
+
+.interest-section strong {
+    color: #2c3e50;
+}
+
+.interests-footer {
+    text-align: center;
+    padding: 20px;
+    background: #f0f0f0;
+    margin-top: 30px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.interest-section ul {
+    list-style-type: disc;
+}
+
+.interest-section ol {
+    list-style-type: decimal;
+}
