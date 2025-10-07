@@ -7,19 +7,32 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/contact.css">
     <script defer src="./js/contact.js"></script>
+    <script defer src="./js/tracker.js"></script>
+    <script defer src="./js/datetime.js"></script>
 </head>
 <body>
     <div class="container">
         <header>
+            <div class="datetime" id="datetime"></div>
             <nav>
                 <ul>
                     <li><a href="index.html">Главная</a></li>
                     <li><a href="about.html">Обо мне</a></li>
-                    <li><a href="interests.html">Мои интересы</a></li>
+                    <li class="dropdown">
+                        <a href="interests.html">Мои интересы</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="interests.html#hobby">Мое хобби</a></li>
+                            <li><a href="interests.html#books">Любимые книги</a></li>
+                            <li><a href="interests.html#music">Любимая музыка</a></li>
+                            <li><a href="interests.html#games">Любимые игры</a></li>
+                            <li><a href="interests.html#sports">Спорт и активность</a></li>
+                        </ul>
+                    </li>
                     <li><a href="study.html">Учеба</a></li>
                     <li><a href="album.html">Фотоальбом</a></li>
                     <li><a href="contact.html">Контакт</a></li>
                     <li><a href="test.html">Тест</a></li>
+                    <li><a href="history.html">История просмотра</a></li>
                 </ul>
             </nav>
         </header>
@@ -32,6 +45,7 @@
                     <div class="form-group">
                         <label for="fullname">Фамилия Имя Отчество:</label>
                         <input type="text" id="fullname" name="fullname" required>
+                        <div class="error-message" id="fullname-error"></div>
                     </div>
 
                     <div class="form-group">
@@ -40,6 +54,14 @@
                             <label><input type="radio" name="gender" value="male" required> Мужской</label>
                             <label><input type="radio" name="gender" value="female"> Женский</label>
                         </div>
+                        <div class="error-message" id="gender-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="birthdate">Дата рождения:</label>
+                        <input type="text" id="birthdate" name="birthdate" readonly>
+                        <div id="calendar" class="calendar"></div>
+                        <div class="error-message" id="birthdate-error"></div>
                     </div>
 
                     <div class="form-group">
@@ -51,32 +73,35 @@
                             <option value="36-45">36-45 лет</option>
                             <option value="46+">46+ лет</option>
                         </select>
+                        <div class="error-message" id="age-error"></div>
                     </div>
                     
                     <div class="form-group">
                         <label for="phone">Телефон:</label>
                         <input type="text" id="phone" name="phone" required placeholder="+7XXXXXXXXX">
+                        <div class="error-message" id="phone-error"></div>
                     </div>
 
                     <div class="form-group">
                         <label for="email">E-mail:</label>
                         <input type="email" id="email" name="email" required>
+                        <div class="error-message" id="email-error"></div>
                     </div>
 
                     <div class="form-group">
                         <label for="message">Сообщение:</label>
                         <textarea id="message" name="message" rows="5" required></textarea>
+                        <div class="error-message" id="message-error"></div>
                     </div>
 
                     <div class="form-buttons">
-                        <button type="submit">Отправить</button>
+                        <button type="submit" id="submitBtn" disabled>Отправить</button>
                         <button type="reset">Очистить форму</button>
                     </div>
                 </form>
             </div>
         </main>
         <footer>
-            
         </footer>
     </div>
 </body>

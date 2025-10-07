@@ -23,16 +23,20 @@ body {
     flex-direction: column;
     width: 100%;
 }
+
 header {
     background: #2c3e50;
     padding: 0;
     position: sticky;
     top: 0;
     width: 100%;
+    z-index: 1000;
 }
 
 nav {
     padding: 15px 0;
+    position: relative;
+    background: #2c3e50;
 }
 
 nav ul {
@@ -53,10 +57,56 @@ nav a {
     transition: background-color 0.2s ease;
     border-radius: 4px;
     font-weight: 500;
+    position: relative;
 }
 
 nav a:hover {
     background: #1abc9c;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #34495e;
+    min-width: 200px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 1001;
+}
+
+.dropdown-menu li {
+    margin: 0;
+}
+
+.dropdown-menu a {
+    border-radius: 0;
+    white-space: nowrap;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.datetime {
+    text-align: center;
+    color: white;
+    background: #1a252f;
+    padding: 10px 0;
+    font-size: 14px;
+    font-family: 'DejaVu Sans Mono', monospace;
+    width: 100%;
+    display: block;
+    margin: 0;
+    border-bottom: 1px solid #34495e;
+    font-weight: bold;
+    position: relative;
+    z-index: 1001;
 }
 
 main {
@@ -83,4 +133,15 @@ footer {
     color: white;
     margin-top: auto;
     width: 100%;
+}
+
+.datetime {
+    text-align: center;
+    color: white;
+    background: #1a252f;
+    padding: 8px 0;
+    font-size: 0.9em;
+    font-family: 'DejaVu Sans Mono', monospace;
+    width: 100%;
+    display: block;
 }

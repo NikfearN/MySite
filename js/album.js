@@ -24,26 +24,57 @@ const titles = [
 
 const photosPerRow = 4;
 
-const gallery = document.querySelector('.gallery');
-gallery.innerHTML = ''; 
+document.addEventListener('DOMContentLoaded', function() {
+    const gallery = document.querySelector('.gallery');
+    gallery.innerHTML = ''; 
 
-let currentRow;
-for (let i = 0; i < fotos.length; i++) {
-    if (i % photosPerRow === 0) {
-        currentRow = document.createElement('div');
-        currentRow.className = 'photo-row';
-        gallery.appendChild(currentRow);
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.innerHTML = `
+        <span class="modal-close">&times;</span>
+        <img class="modal-content">
+    `;
+    document.body.appendChild(modal);
+
+    const modalImg = modal.querySelector('.modal-content');
+    const closeBtn = modal.querySelector('.modal-close');
+
+    closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+    });
+
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+
+    for (let i = 0; i < fotos.length; i += photosPerRow) {
+        const row = document.createElement('div');
+        row.className = 'photo-row';
+
+        for (let j = i; j < i + photosPerRow && j < fotos.length; j++) {
+            const photoItem = document.createElement('figure');
+            photoItem.className = 'photo-item';
+            
+            const img = document.createElement('img');
+            img.src = fotos[j];
+            img.alt = titles[j];
+            img.loading = "lazy";
+
+            const caption = document.createElement('figcaption');
+            caption.textContent = titles[j];
+
+            img.addEventListener('click', function() {
+                modalImg.src = this.src;
+                modal.style.display = 'flex';
+            });
+
+            photoItem.appendChild(img);
+            photoItem.appendChild(caption);
+            row.appendChild(photoItem);
+        }
+
+        gallery.appendChild(row);
     }
-
-    const figure = document.createElement('figure');
-    figure.className = 'photo-item';
-    const img = document.createElement('img');
-    img.src = fotos[i];
-    img.alt = titles[i];
-    img.title = titles[i];
-    const figcaption = document.createElement('figcaption');
-    figcaption.textContent = titles[i];
-    figure.appendChild(img);
-    figure.appendChild(figcaption);
-    currentRow.appendChild(figure);
-}
+});

@@ -1,5 +1,6 @@
 .form-group {
     margin-bottom: 15px;
+    position: relative;
 }
 
 .form-group label {
@@ -19,16 +20,29 @@
     font-family: inherit;
 }
 
-.form-group input:invalid,
-.form-group select:invalid,
-.form-group textarea:invalid {
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+}
+
+.form-group input.valid,
+.form-group select.valid,
+.form-group textarea.valid {
+    border-color: #00cc00;
+}
+
+.form-group input.invalid,
+.form-group select.invalid,
+.form-group textarea.invalid {
     border-color: #ff4444;
 }
 
-.form-group input:valid,
-.form-group select:valid,
-.form-group textarea:valid {
-    border-color: #00cc00;
+.error-message {
+    color: #ff4444;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
 }
 
 .radio-group {
@@ -58,4 +72,56 @@
     color: white;
     cursor: pointer;
     font-size: 14px;
+}
+
+.form-buttons button:disabled {
+    background: #95a5a6;
+    cursor: not-allowed;
+}
+
+.calendar {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 1000;
+    width: 250px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+}
+
+.calendar-day {
+    padding: 5px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.calendar-day:hover {
+    background: #f0f0f0;
+}
+
+.calendar-day.selected {
+    background: #3498db;
+    color: white;
+}
+
+.calendar-day.other-month {
+    color: #ccc;
 }

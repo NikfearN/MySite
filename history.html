@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История просмотра</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/history.css">
+    <script defer src="./js/tracker.js"></script>
+    <script defer src="./js/datetime.js"></script>
+    <script defer src="./js/history.js"></script>
+    <script defer src="./js/navigation.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="about.html">Обо мне</a></li>
+                    <li class="dropdown">
+                        <a href="interests.html">Мои интересы</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="interests.html#hobby">Мое хобби</a></li>
+                            <li><a href="interests.html#books">Любимые книги</a></li>
+                            <li><a href="interests.html#music">Любимая музыка</a></li>
+                            <li><a href="interests.html#games">Любимые игры</a></li>
+                            <li><a href="interests.html#sports">Спорт и активность</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="study.html">Учеба</a></li>
+                    <li><a href="album.html">Фотоальбом</a></li>
+                    <li><a href="contact.html">Контакт</a></li>
+                    <li><a href="test.html">Тест</a></li>
+                    <li><a href="history.html">История просмотра</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content-section">
+                <h1>История просмотра страниц</h1>
+                
+                <section class="history-section">
+                    <h2>История текущего сеанса</h2>
+                    <table class="history-table" id="sessionHistory">
+                        <thead>
+                            <tr>
+                                <th>Страница</th>
+                                <th>Количество посещений</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </section>
+                
+                <section class="history-section">
+                    <h2>История за все время</h2>
+                    <table class="history-table" id="allTimeHistory">
+                        <thead>
+                            <tr>
+                                <th>Страница</th>
+                                <th>Количество посещений</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </section>
+
+                <div class="history-controls">
+                    <button id="clearSession" class="clear-btn">Очистить историю сеанса</button>
+                    <button id="clearAll" class="clear-btn">Очистить всю историю</button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+        </footer>
+    </div>
+</body>
+</html>
