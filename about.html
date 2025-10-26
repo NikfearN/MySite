@@ -6,9 +6,13 @@
     <title>Обо мне</title>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/about.css">
+    <link rel="stylesheet" href="./css/modal.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script defer src="./js/tracker.js"></script>
     <script defer src="./js/datetime.js"></script>
     <script defer src="./js/navigation.js"></script>
+    <script defer src="./js/modal.js"></script>
+    <script defer src="./js/about-modal.js"></script>
 </head>
 <body>
     <div class="container">
@@ -31,69 +35,75 @@
             <div class="content-section">
                 <h2>Используемые технологии и языки программирования</h2>
                 
+                <div class="tech-info">
+                    <button class="info-btn" data-modal data-modal-title="О разделе" data-modal-content="В этом разделе представлены технологии и языки программирования, которые я изучаю и использую в своих проектах. Нажмите на любую технологию для получения подробной информации.">
+                        ℹ️ О разделе
+                    </button>
+                </div>
+                
                 <div class="tech-categories">
                     <section class="tech-category">
                         <h3>Фронтенд разработка</h3>
                         <ul>
-                            <li>HTML - семантическая верстка</li>
-                            <li>CSS - стилизация и анимации</li>
-                            <li>JavaScript</li>
-                            <li>React.js</li>
-                            <li>Vue.js</li>
+                            <li><a href="#" class="tech-link" data-tech="html">HTML - семантическая верстка</a></li>
+                            <li><a href="#" class="tech-link" data-tech="css">CSS - стилизация и анимации</a></li>
+                            <li><a href="#" class="tech-link" data-tech="javascript">JavaScript</a></li>
+                            <li><a href="#" class="tech-link" data-tech="react">React.js</a></li>
+                            <li><a href="#" class="tech-link" data-tech="vue">Vue.js</a></li>
                         </ul>
                     </section>
 
                     <section class="tech-category">
                         <h3>Бэкенд разработка</h3>
                         <ul>
-                            <li>Node.js</li>
-                            <li>Express.js</li>
-                            <li>Python</li>
-                            <li>Django</li>
-                            <li>PHP</li>
-                            <li>Java</li>
+                            <li><a href="#" class="tech-link" data-tech="nodejs">Node.js</a></li>
+                            <li><a href="#" class="tech-link" data-tech="express">Express.js</a></li>
+                            <li><a href="#" class="tech-link" data-tech="python">Python</a></li>
+                            <li><a href="#" class="tech-link" data-tech="django">Django</a></li>
+                            <li><a href="#" class="tech-link" data-tech="php">PHP</a></li>
+                            <li><a href="#" class="tech-link" data-tech="java">Java</a></li>
                         </ul>
                     </section>
 
                     <section class="tech-category">
                         <h3>Базы данных</h3>
                         <ul>
-                            <li>MySQL</li>
-                            <li>PostgreSQL</li>
-                            <li>SQLite</li>
-                            <li>Redis</li>
+                            <li><a href="#" class="tech-link" data-tech="mysql">MySQL</a></li>
+                            <li><a href="#" class="tech-link" data-tech="postgresql">PostgreSQL</a></li>
+                            <li><a href="#" class="tech-link" data-tech="sqlite">SQLite</a></li>
+                            <li><a href="#" class="tech-link" data-tech="redis">Redis</a></li>
                         </ul>
                     </section>
 
                     <section class="tech-category">
                         <h3>Инструменты разработки</h3>
                         <ul>
-                            <li>Git & GitHub</li>
-                            <li>Docker</li>
-                            <li>VS Code</li>
-                            <li>Figma</li>
+                            <li><a href="#" class="tech-link" data-tech="git">Git & GitHub</a></li>
+                            <li><a href="#" class="tech-link" data-tech="docker">Docker</a></li>
+                            <li><a href="#" class="tech-link" data-tech="vscode">VS Code</a></li>
+                            <li><a href="#" class="tech-link" data-tech="figma">Figma</a></li>
                         </ul>
                     </section>
 
                     <section class="tech-category">
                         <h3>Языки программирования</h3>
                         <ul>
-                            <li>JavaScript/TypeScript</li>
-                            <li>Python</li>
-                            <li>Java</li>
-                            <li>C++</li>
-                            <li>PHP</li>
-                            <li>SQL</li>
+                            <li><a href="#" class="tech-link" data-tech="javascript-lang">JavaScript/TypeScript</a></li>
+                            <li><a href="#" class="tech-link" data-tech="python-lang">Python</a></li>
+                            <li><a href="#" class="tech-link" data-tech="java-lang">Java</a></li>
+                            <li><a href="#" class="tech-link" data-tech="cpp">C++</a></li>
+                            <li><a href="#" class="tech-link" data-tech="php-lang">PHP</a></li>
+                            <li><a href="#" class="tech-link" data-tech="sql-lang">SQL</a></li>
                         </ul>
                     </section>
 
                     <section class="tech-category">
                         <h3>Дополнительные технологии</h3>
                         <ul>
-                            <li>REST API</li>
-                            <li>GraphQL</li>
-                            <li>Responsive Web Design</li>
-                            <li>Cross-browser compatibility</li>
+                            <li><a href="#" class="tech-link" data-tech="rest">REST API</a></li>
+                            <li><a href="#" class="tech-link" data-tech="graphql">GraphQL</a></li>
+                            <li><a href="#" class="tech-link" data-tech="responsive">Responsive Web Design</a></li>
+                            <li><a href="#" class="tech-link" data-tech="crossbrowser">Cross-browser compatibility</a></li>
                         </ul>
                     </section>
                 </div>
