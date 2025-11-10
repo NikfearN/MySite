@@ -1,0 +1,430 @@
+<template>
+  <div class="min-h-screen bg-gradient-contact py-8">
+    <div class="max-w-2xl mx-auto px-4">
+      
+      <div class="bg-white rounded-contact shadow-contact p-8">
+        <h1 class="text-3xl font-bold text-gray-800 text-center mb-8">
+          Контактная форма
+        </h1>
+
+        <form @submit.prevent="submitForm" class="space-y-6">
+          
+          <!-- ФИО -->
+          <div class="form-group-custom">
+            <label class="form-label-custom">
+              Фамилия Имя Отчество:
+            </label>
+            <input 
+              type="text" 
+              :value="contactStore.form.fullname"
+              @input="contactStore.updateField('fullname', $event.target.value)"
+              @blur="contactStore.validateField('fullname')"
+              class="form-input-custom"
+              :class="{ 'form-input-error': contactStore.validations.fullname.error }"
+            />
+            <div v-if="contactStore.validations.fullname.error" class="form-error-custom">
+              {{ contactStore.validations.fullname.message }}
+            </div>
+          </div>
+
+          <!-- Пол -->
+          <div class="form-group-custom">
+            <label class="form-label-custom">
+              Пол:
+            </label>
+            <div class="radio-group-custom">
+              <label class="radio-label-custom">
+                <input 
+                  type="radio" 
+                  value="male"
+                  :checked="contactStore.form.gender === 'male'"
+                  @change="contactStore.updateField('gender', 'male')"
+                  class="radio-input-custom"
+                />
+                Мужской
+              </label>
+              <label class="radio-label-custom">
+                <input 
+                  type="radio" 
+                  value="female"
+                  :checked="contactStore.form.gender === 'female'"
+                  @change="contactStore.updateField('gender', 'female')"
+                  class="radio-input-custom"
+                />
+                Женский
+              </label>
+            </div>
+            <div v-if="contactStore.validations.gender.error" class="form-error-custom">
+              {{ contactStore.validations.gender.message }}
+            </div>
+          </div>
+
+          <!-- Дата рождения -->
+          <div class="form-group-custom relative">
+            <label class="form-label-custom">
+              Дата рождения:
+            </label>
+            <input 
+              type="text" 
+              :value="contactStore.form.birthdate"
+              @click="contactStore.toggleCalendar()"
+              @blur="contactStore.validateField('birthdate')"
+              readonly
+              class="date-input-custom"
+              :class="{ 'form-input-error': contactStore.validations.birthdate.error }"
+            />
+            
+            <!-- Календарь -->
+            <div v-if="contactStore.showCalendar" class="calendar-custom">
+              <div class="calendar-header-custom">
+                <button @click="contactStore.prevMonth()" type="button" class="calendar-nav-custom">‹</button>
+                <span class="calendar-month-custom">{{ contactStore.currentMonth }}</span>
+                <button @click="contactStore.nextMonth()" type="button" class="calendar-nav-custom">›</button>
+              </div>
+              <div class="calendar-grid-custom">
+                <div v-for="day in ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']" :key="day" class="calendar-day-header-custom">
+                  {{ day }}
+                </div>
+                <div 
+                  v-for="day in contactStore.calendarDays" 
+                  :key="day.date"
+                  @click="contactStore.selectDate(day)"
+                  class="calendar-day-custom"
+                  :class="{
+                    'calendar-day-other-month': !day.isCurrentMonth,
+                    'calendar-day-selected': day.isSelected
+                  }"
+                >
+                  {{ day.day }}
+                </div>
+              </div>
+            </div>
+            
+            <div v-if="contactStore.validations.birthdate.error" class="form-error-custom">
+              {{ contactStore.validations.birthdate.message }}
+            </div>
+          </div>
+
+          <!-- Возраст -->
+          <div class="form-group-custom">
+            <label class="form-label-custom">
+              Возраст:
+            </label>
+            <select 
+              v-model="contactStore.form.age"
+              @change="contactStore.validateField('age')"
+              class="form-input-custom"
+              :class="{ 'form-input-error': contactStore.validations.age.error }"
+            >
+              <option value="">Выберите возраст</option>
+              <option value="18-25">18-25 лет</option>
+              <option value="26-35">26-35 лет</option>
+              <option value="36-45">36-45 лет</option>
+              <option value="46+">46+ лет</option>
+            </select>
+            <div v-if="contactStore.validations.age.error" class="form-error-custom">
+              {{ contactStore.validations.age.message }}
+            </div>
+          </div>
+
+          <!-- Телефон -->
+          <div class="form-group-custom">
+            <label class="form-label-custom">
+              Телефон:
+            </label>
+            <input 
+              type="text" 
+              v-model="contactStore.form.phone"
+              @blur="contactStore.validateField('phone')"
+              placeholder="+7XXXXXXXXX"
+              class="form-input-custom"
+              :class="{ 'form-input-error': contactStore.validations.phone.error }"
+            />
+            <div v-if="contactStore.validations.phone.error" class="form-error-custom">
+              {{ contactStore.validations.phone.message }}
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="form-group-custom">
+            <label class="form-label-custom">
+              E-mail:
+            </label>
+            <input 
+              type="email" 
+              v-model="contactStore.form.email"
+              @blur="contactStore.validateField('email')"
+              class="form-input-custom"
+              :class="{ 'form-input-error': contactStore.validations.email.error }"
+            />
+            <div v-if="contactStore.validations.email.error" class="form-error-custom">
+              {{ contactStore.validations.email.message }}
+            </div>
+          </div>
+
+          <!-- Сообщение -->
+          <div class="form-group-custom">
+            <label class="form-label-custom">
+              Сообщение:
+            </label>
+            <textarea 
+              v-model="contactStore.form.message"
+              @blur="contactStore.validateField('message')"
+              rows="5"
+              class="form-textarea-custom"
+              :class="{ 'form-input-error': contactStore.validations.message.error }"
+            ></textarea>
+            <div v-if="contactStore.validations.message.error" class="form-error-custom">
+              {{ contactStore.validations.message.message }}
+            </div>
+          </div>
+
+          <!-- Кнопки -->
+          <div class="form-buttons-custom">
+            <button 
+              type="submit" 
+              :disabled="!contactStore.isFormValid"
+              class="submit-button-custom"
+            >
+              Отправить
+            </button>
+            <button 
+              type="button" 
+              @click="contactStore.resetForm()"
+              class="reset-button-custom"
+            >
+              Очистить форму
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="js">
+import { onMounted } from 'vue'
+import { useHistoryStore } from '../stores/history.js'
+import { useContactStore } from '../stores/contactStore.js'
+
+const historyStore = useHistoryStore()
+const contactStore = useContactStore()
+
+function submitForm() {
+  if (contactStore.isFormValid) {
+    alert('Форма успешно отправлена!')
+    contactStore.resetForm()
+  } else {
+    alert('Пожалуйста, исправьте ошибки в форме')
+  }
+}
+
+onMounted(() => {
+  historyStore.trackPageView('Контакт')
+})
+</script>
+
+<style scoped>
+/* Кастомные стили для контактной формы */
+.bg-gradient-contact {
+  background: linear-gradient(135deg, #ffe6e6, #ffcccc);
+}
+
+.rounded-contact {
+  border-radius: 15px;
+}
+
+.shadow-contact {
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.form-group-custom {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label-custom {
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.form-input-custom {
+  padding: 12px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.form-input-custom:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+.form-input-error {
+  border-color: #e74c3c;
+}
+
+.form-error-custom {
+  color: #e74c3c;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.radio-group-custom {
+  display: flex;
+  gap: 20px;
+}
+
+.radio-label-custom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.radio-input-custom {
+  margin: 0;
+}
+
+.date-input-custom {
+  background-color: #f8f9fa;
+  cursor: pointer;
+}
+
+.calendar-custom {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  z-index: 1000;
+  width: 280px;
+}
+
+.calendar-header-custom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.calendar-month-custom {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.calendar-nav-custom {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.calendar-nav-custom:hover {
+  background: #f0f0f0;
+}
+
+.calendar-grid-custom {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.calendar-day-header-custom {
+  text-align: center;
+  font-weight: bold;
+  font-size: 12px;
+  color: #666;
+  padding: 5px;
+}
+
+.calendar-day-custom {
+  text-align: center;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.calendar-day-custom:hover {
+  background: #f0f0f0;
+}
+
+.calendar-day-selected {
+  background: #4a90e2;
+  color: white;
+}
+
+.calendar-day-other-month {
+  color: #ccc;
+}
+
+.form-textarea-custom {
+  padding: 12px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-textarea-custom:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+.form-buttons-custom {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.submit-button-custom {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  background: #4a90e2;
+  color: white;
+}
+
+.submit-button-custom:hover:not(:disabled) {
+  background: #357ae8;
+}
+
+.submit-button-custom:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+.reset-button-custom {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  background: #95a5a6;
+  color: white;
+}
+
+.reset-button-custom:hover {
+  background: #7f8c8d;
+}
+</style>
