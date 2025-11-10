@@ -1,0 +1,200 @@
+import { defineStore } from 'pinia'
+
+export const useContactStore = defineStore('contact', {
+  state: () => ({
+    form: {
+      fullname: '',
+      gender: '',
+      birthdate: '',
+      age: '',
+      phone: '',
+      email: '',
+      message: ''
+    },
+    validations: {
+      fullname: { valid: false, error: false, message: '' },
+      gender: { valid: false, error: false, message: '' },
+      birthdate: { valid: false, error: false, message: '' },
+      age: { valid: false, error: false, message: '' },
+      phone: { valid: false, error: false, message: '' },
+      email: { valid: false, error: false, message: '' },
+      message: { valid: false, error: false, message: '' }
+    },
+    showCalendar: false,
+    currentDate: new Date(),
+    selectedDate: null
+  }),
+
+  getters: {
+    isFormValid: (state) => {
+      return Object.values(state.validations).every(validation => validation.valid)
+    },
+    
+    calendarDays: (state) => {
+      const year = state.currentDate.getFullYear()
+      const month = state.currentDate.getMonth()
+      
+      const firstDay = new Date(year, month, 1)
+      const lastDay = new Date(year, month + 1, 0)
+      const daysInMonth = lastDay.getDate()
+      
+      const firstDayOfWeek = firstDay.getDay() === 0 ? 6 : firstDay.getDay() - 1
+      const days = []
+
+      // Дни предыдущего месяца
+      const prevMonthLastDay = new Date(year, month, 0).getDate()
+      for (let i = firstDayOfWeek - 1; i >= 0; i--) {
+        days.push({
+          day: prevMonthLastDay - i,
+          date: `${year}-${month}-${prevMonthLastDay - i}`,
+          isCurrentMonth: false
+        })
+      }
+
+      // Дни текущего месяца
+      for (let i = 1; i <= daysInMonth; i++) {
+        const dateStr = `${year}-${month + 1}-${i}`
+        days.push({
+          day: i,
+          date: dateStr,
+          isCurrentMonth: true,
+          isSelected: state.selectedDate === dateStr
+        })
+      }
+
+      return days
+    },
+
+    currentMonth: (state) => {
+      return state.currentDate.toLocaleDateString('ru-RU', { month: 'long', year: 'numeric' })
+    }
+  },
+
+  actions: {
+    // Обновление полей формы
+    updateField(field, value) {
+      this.form[field] = value
+      this.validateField(field)
+    },
+
+    // Валидация полей
+    validateField(field) {
+      switch (field) {
+        case 'fullname':
+          this.validateFullname()
+          break
+        case 'gender':
+          this.validateGender()
+          break
+        case 'birthdate':
+          this.validateBirthdate()
+          break
+        case 'age':
+          this.validateAge()
+          break
+        case 'phone':
+          this.validatePhone()
+          break
+        case 'email':
+          this.validateEmail()
+          break
+        case 'message':
+          this.validateMessage()
+          break
+      }
+    },
+
+    validateFullname() {
+      const words = this.form.fullname.trim().split(/\s+/)
+      if (words.length !== 3) {
+        this.validations.fullname = { valid: false, error: true, message: 'ФИО должно содержать 3 слова' }
+      } else {
+        this.validations.fullname = { valid: true, error: false, message: '' }
+      }
+    },
+
+    validateGender() {
+      this.validations.gender = { 
+        valid: !!this.form.gender, 
+        error: !this.form.gender, 
+        message: !this.form.gender ? 'Выберите пол' : '' 
+      }
+    },
+
+    validateBirthdate() {
+      this.validations.birthdate = { 
+        valid: !!this.form.birthdate, 
+        error: !this.form.birthdate, 
+        message: !this.form.birthdate ? 'Выберите дату рождения' : '' 
+      }
+    },
+
+    validateAge() {
+      this.validations.age = { 
+        valid: !!this.form.age, 
+        error: !this.form.age, 
+        message: !this.form.age ? 'Выберите возраст' : '' 
+      }
+    },
+
+    validatePhone() {
+      const phoneRegex = /^\+[37]\d{9,11}$/
+      if (!phoneRegex.test(this.form.phone)) {
+        this.validations.phone = { valid: false, error: true, message: 'Неверный формат телефона' }
+      } else {
+        this.validations.phone = { valid: true, error: false, message: '' }
+      }
+    },
+
+    validateEmail() {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      if (!emailRegex.test(this.form.email)) {
+        this.validations.email = { valid: false, error: true, message: 'Неверный формат email' }
+      } else {
+        this.validations.email = { valid: true, error: false, message: '' }
+      }
+    },
+
+    validateMessage() {
+      this.validations.message = { 
+        valid: !!this.form.message.trim(), 
+        error: !this.form.message.trim(), 
+        message: !this.form.message.trim() ? 'Сообщение не может быть пустым' : '' 
+      }
+    },
+
+    // Календарь
+    toggleCalendar() {
+      this.showCalendar = !this.showCalendar
+    },
+
+    selectDate(day) {
+      if (day.isCurrentMonth) {
+        this.form.birthdate = `${day.day.toString().padStart(2, '0')}.${(this.currentDate.getMonth() + 1).toString().padStart(2, '0')}.${this.currentDate.getFullYear()}`
+        this.selectedDate = day.date
+        this.showCalendar = false
+        this.validateBirthdate()
+      }
+    },
+
+    prevMonth() {
+      this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() - 1, 1)
+    },
+
+    nextMonth() {
+      this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 1)
+    },
+
+    // Сброс формы
+    resetForm() {
+      Object.keys(this.form).forEach(key => {
+        this.form[key] = ''
+      })
+      Object.keys(this.validations).forEach(key => {
+        this.validations[key] = { valid: false, error: false, message: '' }
+      })
+      this.selectedDate = null
+      this.showCalendar = false
+    }
+  }
+})
